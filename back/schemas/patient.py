@@ -1,23 +1,15 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from datetime import date
-from typing import Optional
 
-class PatientBase(BaseModel):
-    name: str
-    phone: Optional[str] = None
-    date_of_birth: Optional[date] = None
+class PatientCreate(BaseModel):
+    first_name: str
+    last_name: str
+    email: EmailStr
+    phone: str | None
+    date_of_birth: date | None
 
-class PatientCreate(PatientBase):
-    pass
-
-class PatientUpdate(PatientBase):
-    pass
-
-class PatientUpdate(PatientBase):
-    pass
-
-class PatientResponse(PatientBase):
+class PatientRead(PatientCreate):
     id: int
-
+    
     class Config:
         from_attributes = True
